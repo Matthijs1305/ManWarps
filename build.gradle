@@ -1,0 +1,56 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+    id 'java'
+    id "io.freefair.lombok" version "5.3.0"
+    id "com.github.johnrengelman.shadow" version "5.1.0"
+}
+
+group = 'nl.manthos'
+version = '0.0.1-SNAPSHOT'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'papermc-repo'
+        url = 'https://papermc.io/repo/repository/maven-public/'
+    }
+    maven {
+        name = 'sonatype'
+        url = 'https://oss.sonatype.org/content/groups/public/'
+    }
+    maven {
+        url = "http://157.90.148.166:666/libs"
+
+        credentials {
+            username = "phoenix"
+            password = "SNxSY5YoY0gq9amX8t04dZmTjyUPfn2KYCstqttUUTik714oR0Hwl+aJldp+rqdT"
+        }
+        authentication {
+            basic (BasicAuthentication)
+        }
+    }
+}
+
+dependencies {
+    compileOnly 'com.destroystokyo.paper:paper-api:1.12.2-R0.1-SNAPSHOT'
+    compile 'site.phoenixthedev:phoinput-lib:0.8.20-SNAPSHOT'
+    compile 'site.phoenixthedev:phologger:0.5.4-SNAPSHOT'
+}
+
+shadowJar {
+    dependencies {
+        exclude(dependency('com.destroystokyo.paper:paper-api:1.12.2-R0.1-SNAPSHOT'))
+        include(dependency('site.phoenixthedev:phoinput-lib:0.8.20-SNAPSHOT'))
+        include(dependency('site.phoenixthedev:phologger:0.5.4-SNAPSHOT'))
+    }
+}
+
+processResources {
+    from(sourceSets.main.resources.srcDirs) {
+        filter ReplaceTokens, tokens: [version: version]
+    }
+}

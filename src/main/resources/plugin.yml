@@ -1,0 +1,9 @@
+name: ManWarps
+version: @version@
+main: nl.manthos.manwarps.ManWarps
+authors: [ Manthos ]
+description: A easy to use warp plugin wich is very customizable!
+
+commands:
+  manwarps:
+    description: Main user Command!
