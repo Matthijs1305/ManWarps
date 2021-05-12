@@ -63,10 +63,7 @@ public class WarpConfig {
 
     public boolean exists(String warpName) {
         String header = "warps.";
-        if (this.config.contains(header + warpName)) {
-            return true;
-        }
-        return false;
+        return this.config.contains(header + warpName);
     }
 
     public Location getWarp(String warpName){

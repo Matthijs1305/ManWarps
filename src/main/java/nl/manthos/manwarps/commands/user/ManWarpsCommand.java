@@ -12,6 +12,8 @@ import site.phoenixthedev.panelapi.PhoPanelManager;
 import site.phoenixthedev.panelapi.session.SessionData;
 import site.phoenixthedev.panelapi.types.PhoPanel;
 
+import java.util.List;
+
 public class ManWarpsCommand implements CommandExecutor {
 
     private ManWarps main;
@@ -31,12 +33,17 @@ public class ManWarpsCommand implements CommandExecutor {
             Player player = (Player) sender;
 
             if (args.length == 0) {
-                //TODO OPENPANEL
+                phoPanelManager.openPanel(new SessionData(player), Panel.USER_HOME_PANEL.getKey());
+
             } else if (args.length == 1) {
                 if (args[0].equalsIgnoreCase("help")) {
                     this.helpMethod(player);
+
                 } else if (args[0].equalsIgnoreCase("menu")) {
-                    //TODO OPENPANEL
+                    phoPanelManager.openPanel(new SessionData(player), Panel.USER_HOME_PANEL.getKey());
+
+                } else if (args[0].equalsIgnoreCase("list")) {
+
                 } else {
                     if (config.exists(args[0])) {
                         player.teleport(this.config.getWarp(args[0]));
@@ -47,14 +54,27 @@ public class ManWarpsCommand implements CommandExecutor {
                 }
             } else if (args.length == 2) {
                 if (args[0].equalsIgnoreCase("set")) {
-                    config.setNewWarp(args[1], player.getLocation());
-                    player.sendMessage(Formatting.format("&9&lMANWARPS &7- You have set a new warp with the name &9" + args[1] + "&7."));
+                    if (this.config.exists(args[1])) {
+
+                        player.sendMessage(Formatting.format("&9&lMANWARPS &7- Do you want to set the warp with the name &9" + args[1] + " &7to a new location? (&aYes&7/&cNo&7)"));
+                        this.main.panelSetWarp2.add(player.getUniqueId());
+                        this.main.messageSetWarp.put(player.getUniqueId(), args[1]);
+                        player.closeInventory();
+                    } else {
+
+                        config.setNewWarp(args[1], player.getLocation());
+                        player.sendMessage(Formatting.format("&9&lMANWARPS &7- You have set a new warp with the name &9" + args[1] + "&7."));
+                    }
                 }
             }
         } else {
             System.out.println("[ManWarps] You can only use this command in-game!");
         }
         return false;
+    }
+
+    void listMethod(CommandSender player, int page) {
+
     }
 
     void helpMethod(CommandSender player) {
