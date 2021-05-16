@@ -84,5 +84,6 @@ public class ManWarpsCommand implements CommandExecutor {
         player.sendMessage(Formatting.format("&f/&9manwarps help &7- Shows this message."));
         player.sendMessage(Formatting.format("&f/&9manwarps <warpname> &7- Teleport to a warp."));
         player.sendMessage(Formatting.format("&f/&9manwarps set <warpname> &7- Set a new warp."));
+        player.sendMessage(Formatting.format("&f/&9manwarps list &7- Shows a list of all the existing warps."));
     }
 }
