@@ -28,7 +28,7 @@ public class ChatEvent implements Listener {
                 this.main.panelSetWarp.remove(player.getUniqueId());
 
             } else {
-                if (this.config.exists(e.getMessage())) {
+                if (this.config.exists(e.getMessage().toLowerCase())) {
                     player.sendMessage(Formatting.format("&9&lMANWARPS &7- Do you want to set the warp with the name &9" + e.getMessage() + " &7to a new location? (&aYes&7/&cNo&7)"));
                     this.main.panelSetWarp2.add(player.getUniqueId());
                     this.main.messageSetWarp.put(player.getUniqueId(), e.getMessage());
@@ -36,7 +36,7 @@ public class ChatEvent implements Listener {
                     e.setCancelled(true);
 
                 } else {
-                    this.config.setNewWarp(e.getMessage(), player.getLocation());
+                    this.config.setNewWarp(e.getMessage().toLowerCase(), player.getLocation());
                     player.sendMessage(Formatting.format("&9&lMANWARPS &7- You have set a new warp with the name &9" + e.getMessage() + "&7."));
                     this.main.panelSetWarp.remove(player.getUniqueId());
                     e.setCancelled(true);
@@ -47,7 +47,7 @@ public class ChatEvent implements Listener {
                 String name = this.main.messageSetWarp.get(player.getUniqueId());
 
                 player.sendMessage(Formatting.format("&9&lMANWARPS &7- You have set a new warp with the name &9" + name + "&7."));
-                this.config.setNewWarp(name, player.getLocation());
+                this.config.setNewWarp(name.toLowerCase(), player.getLocation());
                 this.main.panelSetWarp2.remove(player.getUniqueId());
                 this.main.messageSetWarp.remove(player.getUniqueId());
                 e.setCancelled(true);

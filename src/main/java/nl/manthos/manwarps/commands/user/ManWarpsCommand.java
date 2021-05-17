@@ -45,8 +45,8 @@ public class ManWarpsCommand implements CommandExecutor {
                 } else if (args[0].equalsIgnoreCase("list")) {
 
                 } else {
-                    if (config.exists(args[0])) {
-                        player.teleport(this.config.getWarp(args[0]));
+                    if (config.exists(args[0].toLowerCase())) {
+                        player.teleport(this.config.getWarp(args[0].toLowerCase()));
                         player.sendMessage(Formatting.format("&9&lMANWARPS &7- You have been teleported to &9" + args[0] + "&7."));
                     } else {
                         player.sendMessage(Formatting.format("&9&lMANWARPS &7- A warp with the name &9" + args[0] + " &7does not exist!"));
@@ -54,7 +54,7 @@ public class ManWarpsCommand implements CommandExecutor {
                 }
             } else if (args.length == 2) {
                 if (args[0].equalsIgnoreCase("set")) {
-                    if (this.config.exists(args[1])) {
+                    if (this.config.exists(args[1].toLowerCase())) {
 
                         player.sendMessage(Formatting.format("&9&lMANWARPS &7- Do you want to set the warp with the name &9" + args[1] + " &7to a new location? (&aYes&7/&cNo&7)"));
                         this.main.panelSetWarp2.add(player.getUniqueId());
@@ -62,7 +62,7 @@ public class ManWarpsCommand implements CommandExecutor {
                         player.closeInventory();
                     } else {
 
-                        config.setNewWarp(args[1], player.getLocation());
+                        config.setNewWarp(args[1].toLowerCase(), player.getLocation());
                         player.sendMessage(Formatting.format("&9&lMANWARPS &7- You have set a new warp with the name &9" + args[1] + "&7."));
                     }
                 }
@@ -84,5 +84,6 @@ public class ManWarpsCommand implements CommandExecutor {
         player.sendMessage(Formatting.format("&f/&9manwarps help &7- Shows this message."));
         player.sendMessage(Formatting.format("&f/&9manwarps <warpname> &7- Teleport to a warp."));
         player.sendMessage(Formatting.format("&f/&9manwarps set <warpname> &7- Set a new warp."));
+        player.sendMessage(Formatting.format("&f/&9manwarps list &7- List all current warps."));
     }
 }
