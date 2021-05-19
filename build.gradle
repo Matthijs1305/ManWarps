@@ -22,30 +22,20 @@ repositories {
         name = 'sonatype'
         url = 'https://oss.sonatype.org/content/groups/public/'
     }
-    maven {
-        url = "http://157.90.148.166:666/libs"
-
-        credentials {
-            username = "phoenix"
-            password = "SNxSY5YoY0gq9amX8t04dZmTjyUPfn2KYCstqttUUTik714oR0Hwl+aJldp+rqdT"
-        }
-        authentication {
-            basic (BasicAuthentication)
-        }
-    }
+    // PRIVATE LIBRARY
 }
 
 dependencies {
     compileOnly 'com.destroystokyo.paper:paper-api:1.12.2-R0.1-SNAPSHOT'
-    compile 'site.phoenixthedev:phoinput-lib:0.8.20-SNAPSHOT'
-    compile 'site.phoenixthedev:phologger:0.5.4-SNAPSHOT'
+    compile // PRIVATE LIBRARY
+    compile // PRIVATE LIBRARY
 }
 
 shadowJar {
     dependencies {
         exclude(dependency('com.destroystokyo.paper:paper-api:1.12.2-R0.1-SNAPSHOT'))
-        include(dependency('site.phoenixthedev:phoinput-lib:0.8.20-SNAPSHOT'))
-        include(dependency('site.phoenixthedev:phologger:0.5.4-SNAPSHOT'))
+        include(dependency('// PRIVATE LIBRARY'))
+        include(dependency('// PRIVATE LIBRARY'))
     }
 }
 
