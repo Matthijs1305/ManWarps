@@ -1,8 +1,10 @@
 package nl.manthos.manwarps.config;
 
 import nl.manthos.manwarps.ManWarps;
+import nl.manthos.manwarps.util.Formatting;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -10,6 +12,8 @@ import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -64,6 +68,17 @@ public class WarpConfig {
     public boolean exists(String warpName) {
         String header = "warps.";
         return this.config.contains(header + warpName);
+    }
+
+    public List<String> getWarps() {
+        final List<String> warps = new ArrayList<>();
+        this.config.getConfigurationSection("warps.").getKeys(false).forEach(item -> {
+            if (!warps.contains(item)) {
+                warps.add(item);
+            }
+            return;
+        });
+        return warps;
     }
 
     public Location getWarp(String warpName){
